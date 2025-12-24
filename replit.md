@@ -62,9 +62,18 @@ This app requires Supabase configuration and API keys for the AI providers you w
 
 ## Recent Changes
 - December 24, 2025: Initial Replit environment setup
-  - Configured Next.js for Replit proxy compatibility
+  - Configured Next.js for Replit proxy compatibility (allowedDevOrigins)
   - Set up development workflow on port 5000
   - Configured deployment settings
+  - Fixed API endpoints to return defaults when Supabase is not configured
+    - `/api/user-preferences` - returns default preferences
+    - `/api/user-key-status` - returns empty provider status
+    - `/api/user-preferences/favorite-models` - returns empty favorites
+
+## Notes
+- The app works in a limited mode without Supabase (no auth, no persistence)
+- For full functionality, configure Supabase environment variables
+- Ollama integration is optional - the app uses static model fallbacks
 
 ## User Preferences
 (None documented yet)

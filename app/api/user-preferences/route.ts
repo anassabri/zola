@@ -6,10 +6,14 @@ export async function GET() {
     const supabase = await createClient()
 
     if (!supabase) {
-      return NextResponse.json(
-        { error: "Database connection failed" },
-        { status: 500 }
-      )
+      return NextResponse.json({
+        layout: "fullscreen",
+        prompt_suggestions: true,
+        show_tool_invocations: true,
+        show_conversation_previews: true,
+        multi_model_enabled: false,
+        hidden_models: [],
+      })
     }
 
     // Get the current user
@@ -72,8 +76,8 @@ export async function PUT(request: NextRequest) {
 
     if (!supabase) {
       return NextResponse.json(
-        { error: "Database connection failed" },
-        { status: 500 }
+        { error: "Supabase is not configured" },
+        { status: 503 }
       )
     }
 

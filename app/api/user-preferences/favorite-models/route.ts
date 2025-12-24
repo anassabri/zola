@@ -7,8 +7,8 @@ export async function POST(request: NextRequest) {
 
     if (!supabase) {
       return NextResponse.json(
-        { error: "Database connection failed" },
-        { status: 500 }
+        { error: "Supabase is not configured" },
+        { status: 503 }
       )
     }
 
@@ -78,10 +78,9 @@ export async function GET() {
     const supabase = await createClient()
 
     if (!supabase) {
-      return NextResponse.json(
-        { error: "Database connection failed" },
-        { status: 500 }
-      )
+      return NextResponse.json({
+        favorite_models: [],
+      })
     }
 
     // Get the current user
