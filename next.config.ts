@@ -13,6 +13,11 @@ const nextConfig: NextConfig = withBundleAnalyzer({
     optimizePackageImports: ["@phosphor-icons/react"],
   },
   serverExternalPackages: ["shiki", "vscode-oniguruma"],
+  allowedDevOrigins: [
+    `https://${process.env.REPLIT_DEV_DOMAIN}`,
+    `http://${process.env.REPLIT_DEV_DOMAIN}`,
+    process.env.REPLIT_DEV_DOMAIN || "",
+  ].filter(Boolean),
   images: {
     remotePatterns: [
       {
