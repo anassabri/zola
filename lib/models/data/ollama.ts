@@ -39,7 +39,7 @@ const getOllamaBaseURL = (): string => {
 const shouldEnableOllama = (): boolean => {
   return (
     process.env.NODE_ENV !== "production" &&
-    process.env.DISABLE_OLLAMA !== "true"
+    process.env.DISABLE_OLLAMA === "true"
   )
 }
 
