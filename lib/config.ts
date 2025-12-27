@@ -24,7 +24,7 @@ export const FREE_MODELS_IDS = [
   "gpt-4.1-nano",
 ]
 
-export const MODEL_DEFAULT = "gemini-2.0-flash-lite-preview-02-05"
+export const MODEL_DEFAULT = "gemini-2.5-flash-lite-preview-03-25"
 
 export const APP_NAME = "Zola"
 export const APP_DOMAIN = "https://zola.chat"

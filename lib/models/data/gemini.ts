@@ -113,15 +113,15 @@ const geminiModels: ModelConfig[] = [
       openproviders("gemini-2.0-flash-001", undefined, apiKey),
   },
   {
-    id: "gemini-2.0-flash-lite-preview-02-05",
-    name: "Gemini 2.0 Flash Lite Preview",
+    id: "gemini-2.5-flash-lite-preview-03-25",
+    name: "Gemini 2.5 Flash Lite Preview",
     provider: "Google",
     providerId: "google",
     modelFamily: "Gemini",
     baseProviderId: "google",
-    description: "Lite preview version of Gemini 2.0 Flash.",
+    description: "Lite preview version of Gemini 2.5 Flash.",
     tags: ["preview", "lite", "fast", "experimental"],
-    contextWindow: 500000,
+    contextWindow: 1000000,
     inputCost: 0.0375,
     outputCost: 0.15,
     priceUnit: "per 1M tokens",
@@ -137,7 +137,7 @@ const geminiModels: ModelConfig[] = [
     modelPage: "https://deepmind.google/technologies/gemini",
     icon: "gemini",
     apiSdk: (apiKey?: string) =>
-      openproviders("gemini-2.0-flash-lite-preview-02-05", undefined, apiKey),
+      openproviders("gemini-2.5-flash-lite-preview-03-25", undefined, apiKey),
   },
   {
     id: "gemini-2.0-pro-exp-02-05",
