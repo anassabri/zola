@@ -113,7 +113,7 @@ const geminiModels: ModelConfig[] = [
       openproviders("gemini-2.0-flash-001", undefined, apiKey),
   },
   {
-    id: "gemini-2.5-flash-lite-preview-03-25",
+    id: "gemini-2.5-flash-lite-preview-09-2025",
     name: "Gemini 2.5 Flash Lite Preview",
     provider: "Google",
     providerId: "google",
@@ -137,7 +137,7 @@ const geminiModels: ModelConfig[] = [
     modelPage: "https://deepmind.google/technologies/gemini",
     icon: "gemini",
     apiSdk: (apiKey?: string) =>
-      openproviders("gemini-2.5-flash-lite-preview-03-25", undefined, apiKey),
+      openproviders("gemini-2.5-flash-lite-preview-09-2025", undefined, apiKey),
   },
   {
     id: "gemini-2.0-pro-exp-02-05",
