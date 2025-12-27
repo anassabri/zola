@@ -1,0 +1,153 @@
+Console Error
+
+A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+See more info here: https://nextjs.org/docs/messages/react-hydration-error
+
+
+  ...
+    <main className="@container...">
+      ...
+        <div className="pointer-ev...">
+          <DialogPublish>
+          <ButtonNewChat>
+          <HistoryTrigger hasSidebar={false}>
+            <CommandHistory chatHistory={[...]} onSaveEdit={function handleSaveEdit} ...>
+              <Tooltip>
+              <CustomCommandDialog onOpenChange={function handleOpenChange} open={false} title="Chat History" ...>
+                <Dialog onOpenChange={function handleOpenChange} open={false}>
+                  <Dialog data-slot="dialog" onOpenChange={function handleOpenChange} open={false}>
+                    <DialogProvider scope={undefined} triggerRef={{current:null}} contentRef={{current:null}} ...>
+                      <DialogHeader className="sr-only">
+                        <div data-slot="dialog-header" className="flex flex-...">
+                          <DialogTitle>
+                            <DialogTitle data-slot="dialog-title" className="text-lg le...">
+                              <Primitive.h2 id="radix-_R_j..." data-slot="dialog-title" className="text-lg le..." ...>
+                                <h2
++                                 id="radix-_R_jr5etalbH1_"
+-                                 id="radix-_R_2fd5etalbH1_"
+                                  data-slot="dialog-title"
+                                  className="text-lg leading-none font-semibold"
+                                  ref={null}
+                                >
++                                 Chat History
+                          <DialogDescription>
+                            <DialogDescription data-slot="dialog-des..." className="text-muted...">
+                              <Primitive.p id="radix-_R_j..." data-slot="dialog-des..." className="text-muted..." ...>
+                                <p
++                                 id="radix-_R_jr5etalbH2_"
+-                                 id="radix-_R_2fd5etalbH2_"
+                                  data-slot="dialog-description"
+                                  className="text-muted-foreground text-sm"
+                                  ref={null}
+                                >
++                                 Search through your past conversations
+                      ...
+          ...
+            <Primitive.button aria-describedby={undefined} data-state="closed" data-slot="tooltip-tr..." asChild={true} ...>
+              <Primitive.button.Slot aria-describedby={undefined} data-state="closed" data-slot="tooltip-tr..." ...>
+                <Primitive.button.SlotClone aria-describedby={undefined} data-state="closed" data-slot="tooltip-tr..." ...>
+                  <DropdownMenuTrigger aria-describedby={undefined} data-state="closed" data-slot="tooltip-tr..." ...>
+                    <DropdownMenuTrigger data-slot="tooltip-tr..." aria-describedby={undefined} data-state="closed" ...>
+                      <MenuAnchor asChild={true} __scopeMenu={{Menu:[...], ...}}>
+                        <PopperAnchor __scopePopper={{Menu:[...], ...}} asChild={true} ref={null}>
+                          <Primitive.div asChild={true} ref={function}>
+                            <Primitive.div.Slot ref={function}>
+                              <Primitive.div.SlotClone ref={function}>
+                                <Primitive.button type="button" id="radix-_R_4..." aria-haspopup="menu" ...>
+                                  <button
+                                    type="button"
++                                   id="radix-_R_4r5etalb_"
+-                                   id="radix-_R_jd5etalb_"
+                                    aria-haspopup="menu"
+                                    aria-expanded={false}
+                                    aria-controls={undefined}
+                                    data-state="closed"
+                                    data-disabled={undefined}
+                                    disabled={false}
+                                    data-slot="tooltip-trigger"
+                                    aria-describedby={undefined}
+                                    onPointerMove={function handleEvent}
+                                    onPointerLeave={function handleEvent}
+                                    onPointerDown={function handleEvent}
+                                    onFocus={function handleEvent}
+                                    onBlur={function handleEvent}
+                                    onClick={function handleEvent}
+                                    onKeyDown={function handleEvent}
+                                    ref={function}
+                                  >
+      ...
+        <Primitive.button.Slot aria-describedby={undefined} data-state="closed" data-slot="tooltip-tr..." ...>
+          <Primitive.button.SlotClone aria-describedby={undefined} data-state="closed" data-slot="tooltip-tr..." ...>
+            <DropdownMenuTrigger asChild={true} aria-describedby={undefined} data-state="closed" ...>
+              <DropdownMenuTrigger data-slot="tooltip-tr..." asChild={true} aria-describedby={undefined} ...>
+                <MenuAnchor asChild={true} __scopeMenu={{Menu:[...], ...}}>
+                  <PopperAnchor __scopePopper={{Menu:[...], ...}} asChild={true} ref={null}>
+                    <Primitive.div asChild={true} ref={function}>
+                      <Primitive.div.Slot ref={function}>
+                        <Primitive.div.SlotClone ref={function}>
+                          <Primitive.button type="button" id="radix-_R_d..." aria-haspopup="menu" aria-expanded={false} ...>
+                            <Primitive.button.Slot type="button" id="radix-_R_d..." aria-haspopup="menu" ...>
+                              <Primitive.button.SlotClone type="button" id="radix-_R_d..." aria-haspopup="menu" ...>
+                                <Button variant="outline" className="dark:bg-se..." disabled={true} type="button" ...>
+                                  <button
+                                    data-slot="tooltip-trigger"
+                                    className={"inline-flex items-center gap-2 whitespace-nowrap text-sm font-medium ..."}
+                                    disabled={true}
+                                    type="button"
++                                   id="radix-_R_d7kt5etalb_"
+-                                   id="radix-_R_1kujl5etalb_"
+                                    aria-haspopup="menu"
+                                    aria-expanded={false}
+                                    aria-controls={undefined}
+                                    data-state="closed"
+                                    data-disabled={undefined}
+                                    aria-describedby={undefined}
+                                    onPointerMove={function handleEvent}
+                                    onPointerLeave={function handleEvent}
+                                    onPointerDown={function handleEvent}
+                                    onFocus={function handleEvent}
+                                    onBlur={function handleEvent}
+                                    onClick={function handleEvent}
+                                    onKeyDown={function handleEvent}
+                                    ref={function}
+                                  >
+components/ui/dialog.tsx (111:5) @ DialogTitle
+
+
+  109 | }: React.ComponentProps<typeof DialogPrimitive.Title>) {
+  110 |   return (
+> 111 |     <DialogPrimitive.Title
+      |     ^
+  112 |       data-slot="dialog-title"
+  113 |       className={cn("text-lg leading-none font-semibold", className)}
+  114 |       {...props}
+Call Stack
+27
+
+Show 19 ignore-listed frame(s)
+h2
+<anonymous>
+DialogTitle
+components/ui/dialog.tsx (111:5)
+CustomCommandDialog
+app/components/history/command-history.tsx (316:9)
+CommandHistory
+app/components/history/command-history.tsx (569:7)
+HistoryTrigger
+app/components/history/history-trigger.tsx (79:5)
+Header
+app/components/layout/header.tsx (68:31)
+LayoutApp
+app/components/layout/layout-app.tsx (15:9)
+Home
+app/page.tsx (10:7)
+1
+2

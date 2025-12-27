@@ -7,7 +7,7 @@ import { useChatSession } from "@/lib/chat-store/session/provider"
 import { cn } from "@/lib/utils"
 import { ListMagnifyingGlass } from "@phosphor-icons/react"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { CommandHistory } from "./command-history"
 import { DrawerHistory } from "./drawer-history"
 
@@ -26,12 +26,17 @@ export function HistoryTrigger({
   label,
   hasPopover = true,
 }: HistoryTriggerProps) {
+  const [mounted, setMounted] = useState(false)
   const isMobile = useBreakpoint(768)
   const router = useRouter()
   const { chats, updateTitle, deleteChat } = useChats()
   const { deleteMessages } = useMessages()
   const [isOpen, setIsOpen] = useState(false)
   const { chatId } = useChatSession()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const handleSaveEdit = async (id: string, newTitle: string) => {
     await updateTitle(id, newTitle)
@@ -61,6 +66,8 @@ export function HistoryTrigger({
       {label}
     </button>
   )
+
+  if (!mounted) return null
 
   if (isMobile) {
     return (
