@@ -1,0 +1,104 @@
+2025-12-28 04:21:32.23
+5589f8d6
+User
+cause: undefined
+2025-12-28 04:21:32.23
+5589f8d6
+User
+}
+2025-12-28 04:21:32.23
+5589f8d6
+User
+at fn (.next/server/chunks/[root-of-the-server]__17eea6ef._.js:10:2565)
+2025-12-28 04:21:32.23
+5589f8d6
+User
+}
+2025-12-28 04:21:32.23
+5589f8d6
+User
+Streaming error occurred: {
+2025-12-28 04:21:32.23
+5589f8d6
+User
+at (.next/server/chunks/[root-of-the-server]__17eea6ef._.js:6:4701)
+2025-12-28 04:21:32.23
+5589f8d6
+User
+at retry.maxRetries (.next/server/chunks/[root-of-the-server]__17eea6ef._.js:6:35088) {
+2025-12-28 04:21:32.23
+5589f8d6
+User
+at eZ (.next/server/chunks/_56df43b9._.js:3:3568)
+2025-12-28 04:21:32.23
+5589f8d6
+User
+at eH (.next/server/chunks/[root-of-the-server]__17eea6ef._.js:6:4642)
+2025-12-28 04:21:32.23
+5589f8d6
+User
+at oB.doStream (.next/server/chunks/_56df43b9._.js:3:126533)
+2025-12-28 04:21:32.23
+5589f8d6
+User
+at (.next/server/chunks/[root-of-the-server]__17eea6ef._.js:10:1628)
+2025-12-28 04:21:32.23
+5589f8d6
+User
+at eZ (.next/server/chunks/[root-of-the-server]__17eea6ef._.js:6:3339)
+2025-12-28 04:21:32.23
+5589f8d6
+User
+error: Error [AI_LoadAPIKeyError]: OpenAI API key is missing. Pass it using the 'apiKey' parameter or the OPENAI_API_KEY environment variable.
+2025-12-28 04:21:32.24
+5589f8d6
+User
+at (.next/server/chunks/[root-of-the-server]__17eea6ef._.js:6:4701)
+2025-12-28 04:21:32.24
+5589f8d6
+User
+at eH (.next/server/chunks/[root-of-the-server]__17eea6ef._.js:6:4642)
+2025-12-28 04:21:32.24
+5589f8d6
+User
+at (.next/server/chunks/[root-of-the-server]__17eea6ef._.js:10:1628)
+2025-12-28 04:21:32.24
+5589f8d6
+User
+}
+2025-12-28 04:21:32.24
+5589f8d6
+User
+cause: undefined
+2025-12-28 04:21:32.24
+5589f8d6
+User
+at oB.doStream (.next/server/chunks/_56df43b9._.js:3:126533)
+2025-12-28 04:21:32.24
+5589f8d6
+User
+at Object.startActiveSpan (.next/server/chunks/[root-of-the-server]__17eea6ef._.js:6:4215)
+2025-12-28 04:21:32.24
+5589f8d6
+User
+Error forwarded to client: Error [AI_LoadAPIKeyError]: OpenAI API key is missing. Pass it using the 'apiKey' parameter or the OPENAI_API_KEY environment variable.
+2025-12-28 04:21:32.24
+5589f8d6
+User
+at Object.a [as headers] (.next/server/chunks/_56df43b9._.js:13:23549)
+2025-12-28 04:21:32.24
+5589f8d6
+User
+at retry.maxRetries (.next/server/chunks/[root-of-the-server]__17eea6ef._.js:6:35088) {
+2025-12-28 04:21:32.24
+5589f8d6
+User
+at fn (.next/server/chunks/[root-of-the-server]__17eea6ef._.js:10:2565)
+2025-12-28 04:21:32.24
+5589f8d6
+User
+at eZ (.next/server/chunks/[root-of-the-server]__17eea6ef._.js:6:3339)
+2025-12-28 04:21:32.24
+5589f8d6
+User
+at eZ (.next/server/chunks/_56df43b9._.js:3:3568)
