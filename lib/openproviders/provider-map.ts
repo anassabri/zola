@@ -81,6 +81,7 @@ const MODEL_PROVIDER_MAP: Record<string, Provider> = {
   "gemini-2.0-flash-lite-preview-02-05": "google",
   "gemini-2.0-pro-exp-02-05": "google",
   "gemini-2.0-flash-thinking-exp-01-21": "google",
+  "gemini-2.5-flash-lite-preview-09-2025": "google",
   "gemini-2.0-flash-exp": "google",
   "gemini-exp-1206": "google",
   "gemma-3-27b-it": "google",
