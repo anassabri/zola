@@ -3,7 +3,8 @@ import { getAllModels } from "@/lib/models"
 import { getProviderForModel } from "@/lib/openproviders/provider-map"
 import type { ProviderWithoutOllama } from "@/lib/user-keys"
 import { Attachment } from "@ai-sdk/ui-utils"
-import { streamText, ToolSet, type Message as MessageAISDK } from "ai"
+import { streamText, ToolSet } from "ai"
+import type { CoreMessage } from "ai"
 import {
   incrementMessageCount,
   logUserMessage,
@@ -15,7 +16,7 @@ import { createErrorResponse, extractErrorMessage } from "./utils"
 export const maxDuration = 60
 
 type ChatRequest = {
-  messages: MessageAISDK[]
+  messages: CoreMessage[]
   chatId: string
   userId: string
   model: string
@@ -74,12 +75,13 @@ export async function POST(req: Request) {
     }
 
     if (supabase && userMessage?.role === "user") {
+      const content = typeof userMessage.content === 'string' ? userMessage.content : JSON.stringify(userMessage.content)
       await logUserMessage({
         supabase,
         userId,
         chatId,
-        content: userMessage.content,
-        attachments: userMessage.experimental_attachments as Attachment[],
+        content: content,
+        attachments: (userMessage as any).experimental_attachments as Attachment[],
         model,
         isAuthenticated,
         message_group_id,
@@ -128,12 +130,7 @@ export async function POST(req: Request) {
       },
     })
 
-    return result.toDataStreamResponse({
-      getErrorMessage: (error: unknown) => {
-        console.error("Error forwarded to client:", error)
-        return extractErrorMessage(error)
-      },
-    })
+    return result.toTextStreamResponse()
   } catch (err: unknown) {
     console.error("Error in /api/chat:", err)
     const error = err as {

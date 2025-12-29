@@ -61,14 +61,13 @@ This app requires Supabase configuration and API keys for the AI providers you w
 - `OPENROUTER_API_KEY`
 
 ## Recent Changes
-- December 24, 2025: Initial Replit environment setup
-  - Configured Next.js for Replit proxy compatibility (allowedDevOrigins)
-  - Set up development workflow on port 5000
-  - Configured deployment settings
-  - Fixed API endpoints to return defaults when Supabase is not configured
-    - `/api/user-preferences` - returns default preferences
-    - `/api/user-key-status` - returns empty provider status
-    - `/api/user-preferences/favorite-models` - returns empty favorites
+- December 29, 2025: Resolved critical deployment and runtime issues.
+  - Updated AI SDK to v5.0.116 and @openrouter/ai-sdk-provider to v1.5.4 to fix dependency conflicts.
+  - Corrected `Message` type imports to `CoreMessage` and `UIMessage` in `app/api/chat/route.ts` for AI SDK compatibility.
+  - Fixed TypeScript type mismatches in Supabase operations across several API routes (`create-guest`, `models`, `projects`).
+  - Resolved hydration errors in `HistoryTrigger` by ensuring client-side only rendering for interactive components.
+  - Installed missing `@ai-sdk/react` and `@ai-sdk/ui-utils` dependencies.
+  - Set Gemini 2.5 Flash Lite Preview as the default AI model.
 
 ## Notes
 - The app works in a limited mode without Supabase (no auth, no persistence)
