@@ -130,7 +130,7 @@ export async function POST(req: Request) {
       },
     })
 
-    return result.toTextStreamResponse()
+    return result.toDataStreamResponse()
   } catch (err: unknown) {
     console.error("Error in /api/chat:", err)
     const error = err as {
