@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/client"
 import { isSupabaseEnabled } from "@/lib/supabase/config"
-import type { Message as MessageAISDK } from "ai"
+import type { UIMessage as MessageAISDK } from "@ai-sdk/react"
 import { readFromIndexedDB, writeToIndexedDB } from "../persist"
 
 export interface ExtendedMessageAISDK extends MessageAISDK {
@@ -23,7 +23,7 @@ export async function getMessagesFromDb(
   const { data, error } = await supabase
     .from("messages")
     .select(
-      "id, content, role, experimental_attachments, created_at, parts, message_group_id, model"
+      "id, content, role, attachments, created_at, parts, message_group_id, model"
     )
     .eq("chat_id", chatId)
     .order("created_at", { ascending: true })
@@ -38,7 +38,7 @@ export async function getMessagesFromDb(
     id: String(message.id),
     content: message.content ?? "",
     createdAt: new Date(message.created_at || ""),
-    parts: (message?.parts as MessageAISDK["parts"]) || undefined,
+    parts: (message?.parts as any) || undefined,
     message_group_id: message.message_group_id,
     model: message.model,
   }))
@@ -59,7 +59,7 @@ export async function getLastMessagesFromDb(
   const { data, error } = await supabase
     .from("messages")
     .select(
-      "id, content, role, experimental_attachments, created_at, parts, message_group_id, model"
+      "id, content, role, attachments, created_at, parts, message_group_id, model"
     )
     .eq("chat_id", chatId)
     .order("created_at", { ascending: false })
@@ -76,7 +76,7 @@ export async function getLastMessagesFromDb(
     id: String(message.id),
     content: message.content ?? "",
     createdAt: new Date(message.created_at || ""),
-    parts: (message?.parts as MessageAISDK["parts"]) || undefined,
+    parts: (message?.parts as any) || undefined,
     message_group_id: message.message_group_id,
     model: message.model,
   }))
@@ -92,11 +92,11 @@ async function insertMessageToDb(
   await supabase.from("messages").insert({
     chat_id: chatId,
     role: message.role,
-    content: message.content,
-    experimental_attachments: message.experimental_attachments,
-    created_at: message.createdAt?.toISOString() || new Date().toISOString(),
-    message_group_id: message.message_group_id || null,
-    model: message.model || null,
+    content: (message as any).content,
+    attachments: (message as any).attachments,
+    created_at: (message as any).createdAt?.toISOString() || new Date().toISOString(),
+    message_group_id: (message as any).message_group_id || null,
+    model: (message as any).model || null,
   })
 }
 
@@ -110,11 +110,11 @@ async function insertMessagesToDb(
   const payload = messages.map((message) => ({
     chat_id: chatId,
     role: message.role,
-    content: message.content,
-    experimental_attachments: message.experimental_attachments,
-    created_at: message.createdAt?.toISOString() || new Date().toISOString(),
-    message_group_id: message.message_group_id || null,
-    model: message.model || null,
+    content: (message as any).content,
+    attachments: (message as any).attachments,
+    created_at: (message as any).createdAt?.toISOString() || new Date().toISOString(),
+    message_group_id: (message as any).message_group_id || null,
+    model: (message as any).model || null,
   }))
 
   await supabase.from("messages").insert(payload)
@@ -147,7 +147,7 @@ export async function getCachedMessages(
   if (!entry || Array.isArray(entry)) return []
 
   return (entry.messages || []).sort(
-    (a, b) => +new Date(a.createdAt || 0) - +new Date(b.createdAt || 0)
+    (a, b) => +new Date((a as any).createdAt || 0) - +new Date((b as any).createdAt || 0)
   )
 }
 
