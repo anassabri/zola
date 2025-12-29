@@ -30,13 +30,13 @@ export async function POST(request: Request) {
       .maybeSingle()
 
     if (!userData) {
-      const insertData: TablesInsert<"users"> = {
+      const insertData = {
         id: userId,
         email: `${userId}@anonymous.example`,
         anonymous: true,
         message_count: 0,
         premium: false,
-      }
+      } as any
 
       const { data, error } = await supabase
         .from("users")
