@@ -27,7 +27,7 @@ export function useMultiChat(models: ModelConfig[]): ModelChat[] {
     // todo: fix this
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useChat({
-      api: "/api/chat",
+      // api: "/api/chat", // The useChat hook no longer accepts 'api' directly in this version
       onError: (error) => {
         const model = models[index]
         if (model) {
