@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/toast"
 import { isSupabaseEnabled } from "@/lib/supabase/config"
 import { cn } from "@/lib/utils"
-import { UIMessage as MessageType } from "@ai-sdk/react"
+import type { UIMessage as MessageType } from "@ai-sdk/ui-utils"
 import {
   Check,
   Copy,

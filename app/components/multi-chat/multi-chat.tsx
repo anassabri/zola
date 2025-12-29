@@ -10,7 +10,7 @@ import { SYSTEM_PROMPT_DEFAULT } from "@/lib/config"
 import { useModel } from "@/lib/model-store/provider"
 import { useUser } from "@/lib/user-store/provider"
 import { cn } from "@/lib/utils"
-import { Message as MessageType } from "@ai-sdk/react"
+import type { Message as MessageType } from "ai"
 import { AnimatePresence, motion } from "motion/react"
 import { useCallback, useMemo, useState } from "react"
 import { MultiChatInput } from "./multi-chat-input"
@@ -207,6 +207,7 @@ export function MultiChat() {
               id: `loading-${chat.model.id}`,
               role: "assistant",
               content: "",
+              createdAt: new Date(),
             }
             liveGroups[groupKey].responses.push({
               model: chat.model.id,
