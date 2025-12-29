@@ -4,7 +4,7 @@ import { Provider } from "./openproviders/types"
 import { createClient } from "./supabase/server"
 
 export type { Provider } from "./openproviders/types"
-export type ProviderWithoutOllama = Provider
+export type ProviderWithoutOllama = Exclude<Provider, "ollama">
 
 export async function getUserKey(
   userId: string,
@@ -42,6 +42,12 @@ export async function getEffectiveApiKey(
 
   const envKeyMap: Record<ProviderWithoutOllama, string | undefined> = {
     google: env.GOOGLE_GENERATIVE_AI_API_KEY,
+    openai: process.env.OPENAI_API_KEY,
+    anthropic: process.env.ANTHROPIC_API_KEY,
+    mistral: process.env.MISTRAL_API_KEY,
+    perplexity: process.env.PERPLEXITY_API_KEY,
+    xai: process.env.XAI_API_KEY,
+    openrouter: process.env.OPENROUTER_API_KEY,
   }
 
   return envKeyMap[provider] || null

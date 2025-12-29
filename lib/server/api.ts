@@ -1,5 +1,3 @@
-import type { Database } from "@/app/types/database.types"
-import type { SupabaseClient } from "@supabase/supabase-js"
 import { createClient } from "@/lib/supabase/server"
 import { createGuestServerClient } from "@/lib/supabase/server-guest"
 import { isSupabaseEnabled } from "../supabase/config"
@@ -13,7 +11,7 @@ import { isSupabaseEnabled } from "../supabase/config"
 export async function validateUserIdentity(
   userId: string,
   isAuthenticated: boolean
-): Promise<SupabaseClient<Database> | null> {
+) {
   if (!isSupabaseEnabled) {
     return null
   }

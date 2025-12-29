@@ -21,6 +21,14 @@ export type GeminiModel =
   | "gemma-3-27b-it"
   | "learnlm-1.5-pro-experimental"
 
-export type Provider = "google"
+export type Provider =
+  | "google"
+  | "openai"
+  | "anthropic"
+  | "mistral"
+  | "perplexity"
+  | "xai"
+  | "openrouter"
+  | "ollama"
 
 export type SupportedModel = GeminiModel

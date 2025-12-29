@@ -115,7 +115,7 @@ export function MultiChat() {
           }
         }
       } else if (message.role === "assistant") {
-        let associatedUserMessage = null
+        let associatedUserMessage: MessageType | null = null
         for (let j = i - 1; j >= 0; j--) {
           if (persistedMessages[j].role === "user") {
             associatedUserMessage = persistedMessages[j]
