@@ -1,3 +1,4 @@
+import type { ComponentType, SVGProps } from "react"
 import Gemini from "@/components/icons/gemini"
 import Google from "@/components/icons/google"
 
@@ -5,7 +6,7 @@ export type Provider = {
   id: string
   name: string
   available: boolean
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
+  icon: ComponentType<SVGProps<SVGSVGElement>>
 }
 
 export const PROVIDERS: Provider[] = [
