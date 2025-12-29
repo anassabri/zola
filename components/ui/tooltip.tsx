@@ -25,9 +25,16 @@ function Tooltip({
 }
 
 function TooltipTrigger({
+  disabled,
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {
-  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />
+  return (
+    <TooltipPrimitive.Trigger
+      data-slot="tooltip-trigger"
+      disabled={disabled || undefined}
+      {...props}
+    />
+  )
 }
 
 function TooltipContent({

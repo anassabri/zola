@@ -186,7 +186,7 @@ function PromptInputAction({
     <Tooltip {...props}>
       <TooltipTrigger
         asChild
-        disabled={disabled}
+        disabled={disabled ?? false}
         onClick={(event) => event.stopPropagation()}
       >
         {children}
