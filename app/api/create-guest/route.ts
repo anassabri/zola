@@ -37,7 +37,6 @@ export async function POST(request: Request) {
           anonymous: true,
           message_count: 0,
           premium: false,
-          created_at: new Date().toISOString(),
         })
         .select("*")
         .single()
