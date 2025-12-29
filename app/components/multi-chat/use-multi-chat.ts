@@ -49,19 +49,19 @@ export function useMultiChat(models: ModelConfig[]): ModelChat[] {
 
       return {
         model,
-        messages: chatHook.messages,
-        isLoading: chatHook.isLoading,
+        messages: (chatHook as any).messages,
+        isLoading: (chatHook as any).status === "streaming" || (chatHook as any).status === "submitted",
         append: (message: any, options?: any) => {
-          return chatHook.append(message, options)
+          return (chatHook as any).append(message, options)
         },
-        stop: chatHook.stop,
+        stop: (chatHook as any).stop,
       }
     })
 
     return instances
     // todo: fix this
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [models, ...chatHooks.flatMap((chat) => [chat.messages, chat.isLoading])])
+  }, [models, ...chatHooks.flatMap((chat) => [(chat as any).messages, (chat as any).status])])
 
   return activeChatInstances
 }
