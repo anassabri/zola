@@ -42,3 +42,6 @@ build = ["npm", "run", "build"]
 
 [userenv.shared]
 ENCRYPTION_KEY = "lEc6tuSOrfFFcUKM2qadvz725fN96qqGgmOMhTMwvEk="
+NEXT_PUBLIC_SUPABASE_URL = "https://mtmkmvoydhwpdcjevnbo.supabase.co"
+SUPABASE_SERVICE_ROLE = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im10bWttdm95ZGh3cGRjamV2bmJvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2Njk4Mzg4MCwiZXhwIjoyMDgyNTU5ODgwfQ.1f4CaQVSoH8q6wGDeuA0pSybRtqfqYqejq3SX6kNE0I"
+NEXT_PUBLIC_SUPABASE_ANON_KEY = "sb_publishable_8OTtHd46klKEYdaAdMwPqg_sKzfTSPE"
