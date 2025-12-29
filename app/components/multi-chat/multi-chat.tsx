@@ -107,7 +107,7 @@ export function MultiChat() {
       const message = persistedMessages[i]
 
       if (message.role === "user") {
-        const groupKey = message.content
+        const groupKey = (message as any).content
         if (!groups[groupKey]) {
           groups[groupKey] = {
             userMessage: message,
@@ -124,7 +124,7 @@ export function MultiChat() {
         }
 
         if (associatedUserMessage) {
-          const groupKey = associatedUserMessage.content
+          const groupKey = (associatedUserMessage as any).content
           if (!groups[groupKey]) {
             groups[groupKey] = {
               userMessage: associatedUserMessage,
@@ -173,7 +173,7 @@ export function MultiChat() {
         const assistantMsg = chat.messages[i + 1]
 
         if (userMsg?.role === "user") {
-          const groupKey = userMsg.content
+          const groupKey = (userMsg as any).content
 
           if (!liveGroups[groupKey]) {
             liveGroups[groupKey] = {
@@ -207,7 +207,7 @@ export function MultiChat() {
               id: `loading-${chat.model.id}`,
               role: "assistant",
               content: "",
-            }
+            } as any
             liveGroups[groupKey].responses.push({
               model: chat.model.id,
               message: placeholderMessage,
