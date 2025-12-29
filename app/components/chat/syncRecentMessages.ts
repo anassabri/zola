@@ -1,6 +1,6 @@
 import { getLastMessagesFromDb } from "@/lib/chat-store/messages/api"
 import { writeToIndexedDB } from "@/lib/chat-store/persist"
-import type { Message as MessageAI } from "ai"
+import type { UIMessage as MessageAI } from "@ai-sdk/react"
 
 export async function syncRecentMessages(
   chatId: string,
@@ -30,7 +30,7 @@ export async function syncRecentMessages(
             ...local,
             id: String(dbMsg.id),
             createdAt: dbMsg.createdAt,
-          }
+          } as any
           changed = true
         }
         break
