@@ -6,7 +6,7 @@ import {
 } from "@/components/prompt-kit/message"
 import { useUserPreferences } from "@/lib/user-preference-store/provider"
 import { cn } from "@/lib/utils"
-import type { Message as MessageAISDK } from "@ai-sdk/react"
+import type { UIMessage as MessageAISDK } from "@ai-sdk/react"
 import { ArrowClockwise, Check, Copy } from "@phosphor-icons/react"
 import { useCallback, useRef } from "react"
 import { getSources } from "./get-sources"
@@ -47,26 +47,26 @@ export function MessageAssistant({
   const { preferences } = useUserPreferences()
   const sources = getSources(parts)
   const toolInvocationParts = parts?.filter(
-    (part) => part.type === "tool-invocation"
+    (part: any) => part.type === "tool-invocation"
   )
-  const reasoningParts = parts?.find((part) => part.type === "reasoning")
+  const reasoningParts = parts?.find((part: any) => part.type === "reasoning")
   const contentNullOrEmpty = children === null || children === ""
   const isLastStreaming = status === "streaming" && isLast
   const searchImageResults =
     parts
       ?.filter(
-        (part) =>
+        (part: any) =>
           part.type === "tool-invocation" &&
-          part.toolInvocation?.state === "result" &&
-          part.toolInvocation?.toolName === "imageSearch" &&
-          part.toolInvocation?.result?.content?.[0]?.type === "images"
+          (part as any).toolInvocation?.state === "result" &&
+          (part as any).toolInvocation?.toolName === "imageSearch" &&
+          (part as any).toolInvocation?.result?.content?.[0]?.type === "images"
       )
-      .flatMap((part) =>
+      .flatMap((part: any) =>
         part.type === "tool-invocation" &&
-        part.toolInvocation?.state === "result" &&
-        part.toolInvocation?.toolName === "imageSearch" &&
-        part.toolInvocation?.result?.content?.[0]?.type === "images"
-          ? (part.toolInvocation?.result?.content?.[0]?.results ?? [])
+        (part as any).toolInvocation?.state === "result" &&
+        (part as any).toolInvocation?.toolName === "imageSearch" &&
+        (part as any).toolInvocation?.result?.content?.[0]?.type === "images"
+          ? ((part as any).toolInvocation?.result?.content?.[0]?.results ?? [])
           : []
       ) ?? []
 
