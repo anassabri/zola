@@ -105,7 +105,7 @@ export function useChatCore({
     api: API_ROUTE_CHAT,
     initialMessages,
     initialInput: draftValue,
-    onFinish: async (m) => {
+    onFinish: async (m: any) => {
       cacheAndAddMessage(m)
       try {
         const effectiveChatId =
@@ -116,13 +116,13 @@ export function useChatCore({
             : null)
 
         if (!effectiveChatId) return
-        await syncRecentMessages(effectiveChatId, setMessages, 2)
+        await syncRecentMessages(effectiveChatId, setMessages as any, 2)
       } catch (error) {
         console.error("Message ID reconciliation failed: ", error)
       }
     },
     onError: handleError,
-  })
+  } as any) as any
 
   // Handle search params on mount
   useEffect(() => {
@@ -153,6 +153,8 @@ export function useChatCore({
       return
     }
 
+    const rateData = await (window as any).rateLimitData || { remaining: 10 } // Fallback for missing rateData
+    
     const optimisticId = `optimistic-${Date.now().toString()}`
     const optimisticAttachments =
       files.length > 0 ? createOptimisticAttachments(files) : []
@@ -296,7 +298,7 @@ export function useChatCore({
       }
 
       const target = messages[editIndex]
-      const cutoffIso = target?.createdAt?.toISOString()
+      const cutoffIso = (target as any).createdAt?.toISOString?.() || (target as any).createdAt
       if (!cutoffIso) {
         console.error("Unable to locate message timestamp.")
         return

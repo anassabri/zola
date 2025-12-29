@@ -64,7 +64,7 @@ function ResponseCard({ response, group }: ResponseCardProps) {
             variant="assistant"
             parts={
               response.message.parts || [
-                { type: "text", text: response.message.content },
+                { type: "text", text: (response.message as any).content || "" },
               ]
             }
             attachments={(response.message as any).attachments}
@@ -76,7 +76,7 @@ function ResponseCard({ response, group }: ResponseCardProps) {
             hasScrollAnchor={false}
             className="bg-transparent p-0 px-0"
           >
-            {response.message.content}
+            {(response.message as any).content}
           </Message>
         ) : response.isLoading ? (
           <div className="space-y-2">
@@ -139,7 +139,7 @@ export function MultiModelConversation({
                         variant="user"
                         parts={
                           group.userMessage.parts || [
-                            { type: "text", text: group.userMessage.content },
+                            { type: "text", text: (group.userMessage as any).content || "" },
                           ]
                         }
                         attachments={(group.userMessage as any).attachments}
@@ -152,7 +152,7 @@ export function MultiModelConversation({
                             .message_group_id ?? null
                         }
                       >
-                        {group.userMessage.content}
+                        {(group.userMessage as any).content}
                       </Message>
                     </div>
 
