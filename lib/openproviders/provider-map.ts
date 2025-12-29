@@ -1,4 +1,4 @@
-import type { Provider, SupportedModel } from "./types"
+import type { Provider } from "./types"
 
 // map each model ID to its provider
 const MODEL_PROVIDER_MAP: Record<string, Provider> = {
@@ -26,7 +26,7 @@ const MODEL_PROVIDER_MAP: Record<string, Provider> = {
   "learnlm-1.5-pro-experimental": "google",
 }
 
-export function getProviderForModel(model: SupportedModel): Provider {
+export function getProviderForModel(model: string): Provider {
   const provider = MODEL_PROVIDER_MAP[model]
   if (provider) return provider
 
