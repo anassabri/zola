@@ -40,7 +40,7 @@ export async function GET() {
     const { data, error } = await supabase
       .from("user_keys")
       .select("provider")
-      .eq("user_id", authData.user.id)
+      .eq("user_id", authData.user.id) as { data: { provider: string }[] | null, error: any }
 
     if (error) {
       console.error("Error fetching user keys:", error)
