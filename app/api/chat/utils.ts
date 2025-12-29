@@ -18,14 +18,14 @@ export function cleanMessagesForTools(
     .map((message) => {
       // Skip tool messages entirely when no tools are available
       // Note: Using type assertion since AI SDK types might not include 'tool' role
-      if ((message as { role: string }).role === "tool") {
+      if ((message as any).role === "tool") {
         return null
       }
 
       if (message.role === "assistant") {
-        const cleanedMessage: MessageAISDK = { ...message }
+        const cleanedMessage: any = { ...message }
 
-        if (message.toolInvocations && message.toolInvocations.length > 0) {
+        if ((message as any).toolInvocations && (message as any).toolInvocations.length > 0) {
           delete cleanedMessage.toolInvocations
         }
 
@@ -116,8 +116,8 @@ export function cleanMessagesForTools(
  */
 export function messageHasToolContent(message: MessageAISDK): boolean {
   return !!(
-    message.toolInvocations?.length ||
-    (message as { role: string }).role === "tool" ||
+    (message as any).toolInvocations?.length ||
+    (message as any).role === "tool" ||
     (Array.isArray(message.content) &&
       (message.content as Array<{ type?: string }>).some(
         (part: { type?: string }) =>
