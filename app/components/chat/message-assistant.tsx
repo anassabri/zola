@@ -99,9 +99,9 @@ export function MessageAssistant({
         )}
         {...(isQuoteEnabled && { "data-message-id": messageId })}
       >
-        {reasoningParts && reasoningParts.reasoning && (
+        {reasoningParts && (reasoningParts as any).reasoning && (
           <Reasoning
-            reasoning={reasoningParts.reasoning}
+            reasoning={(reasoningParts as any).reasoning}
             isStreaming={status === "streaming"}
           />
         )}
@@ -109,7 +109,7 @@ export function MessageAssistant({
         {toolInvocationParts &&
           toolInvocationParts.length > 0 &&
           preferences.showToolInvocations && (
-            <ToolInvocation toolInvocations={toolInvocationParts} />
+            <ToolInvocation toolInvocations={toolInvocationParts as any} />
           )}
 
         {searchImageResults.length > 0 && (
