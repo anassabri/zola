@@ -157,12 +157,12 @@ export function useChatCore({
     const optimisticAttachments =
       files.length > 0 ? createOptimisticAttachments(files) : []
 
-    const optimisticMessage = {
+    const optimisticMessage: any = {
       id: optimisticId,
       content: input,
       role: "user" as const,
       createdAt: new Date(),
-      experimental_attachments:
+      attachments:
         optimisticAttachments.length > 0 ? optimisticAttachments : undefined,
     }
 
@@ -176,14 +176,14 @@ export function useChatCore({
       const allowed = await checkLimitsAndNotify(uid)
       if (!allowed) {
         setMessages((prev) => prev.filter((m) => m.id !== optimisticId))
-        cleanupOptimisticAttachments(optimisticMessage.experimental_attachments)
+        cleanupOptimisticAttachments((optimisticMessage as any).attachments)
         return
       }
 
       const currentChatId = await ensureChatExists(uid, input)
       if (!currentChatId) {
         setMessages((prev) => prev.filter((msg) => msg.id !== optimisticId))
-        cleanupOptimisticAttachments(optimisticMessage.experimental_attachments)
+        cleanupOptimisticAttachments((optimisticMessage as any).attachments)
         return
       }
 
@@ -195,7 +195,7 @@ export function useChatCore({
           status: "error",
         })
         setMessages((prev) => prev.filter((msg) => msg.id !== optimisticId))
-        cleanupOptimisticAttachments(optimisticMessage.experimental_attachments)
+        cleanupOptimisticAttachments((optimisticMessage as any).attachments)
         return
       }
 
@@ -205,10 +205,15 @@ export function useChatCore({
         if (attachments === null) {
           setMessages((prev) => prev.filter((m) => m.id !== optimisticId))
           cleanupOptimisticAttachments(
-            optimisticMessage.experimental_attachments
+            (optimisticMessage as any).attachments
           )
           return
         }
+      }
+
+      if (rateData.remaining === 0 && !isAuthenticated) {
+        setHasDialogAuth(true)
+        return false
       }
 
       const options = {
@@ -220,13 +225,13 @@ export function useChatCore({
           systemPrompt: systemPrompt || SYSTEM_PROMPT_DEFAULT,
           enableSearch,
         },
-        experimental_attachments: attachments || undefined,
+        attachments: attachments || undefined,
       }
 
-      handleSubmit(undefined, options)
+      handleSubmit(undefined, options as any)
       setMessages((prev) => prev.filter((msg) => msg.id !== optimisticId))
-      cleanupOptimisticAttachments(optimisticMessage.experimental_attachments)
-      cacheAndAddMessage(optimisticMessage)
+      cleanupOptimisticAttachments((optimisticMessage as any).attachments)
+      cacheAndAddMessage(optimisticMessage as any)
       clearDraft()
 
       if (messages.length > 0) {
@@ -234,7 +239,7 @@ export function useChatCore({
       }
     } catch {
       setMessages((prev) => prev.filter((msg) => msg.id !== optimisticId))
-      cleanupOptimisticAttachments(optimisticMessage.experimental_attachments)
+      cleanupOptimisticAttachments((optimisticMessage as any).attachments)
       toast({ title: "Failed to send message", status: "error" })
     } finally {
       setIsSubmitting(false)
@@ -309,12 +314,12 @@ export function useChatCore({
       const originalMessages = [...messages]
 
       const optimisticId = `optimistic-edit-${Date.now().toString()}`
-      const optimisticEditedMessage = {
+      const optimisticEditedMessage: any = {
         id: optimisticId,
         content: newContent,
         role: "user" as const,
         createdAt: new Date(),
-        experimental_attachments: target.experimental_attachments || undefined,
+        attachments: (target as any).attachments || undefined,
       }
 
       try {
@@ -361,8 +366,8 @@ export function useChatCore({
             enableSearch,
             editCutoffTimestamp: cutoffIso, // Backend will delete messages from this timestamp
           },
-          experimental_attachments:
-            target.experimental_attachments || undefined,
+          attachments:
+            (target as any).attachments || undefined,
         }
 
         // If this is an edit of the very first user message, update chat title
@@ -377,7 +382,7 @@ export function useChatCore({
             role: "user",
             content: newContent,
           },
-          options
+          options as any
         )
 
         // Remove optimistic message
@@ -414,7 +419,7 @@ export function useChatCore({
     async (suggestion: string) => {
       setIsSubmitting(true)
       const optimisticId = `optimistic-${Date.now().toString()}`
-      const optimisticMessage = {
+      const optimisticMessage: any = {
         id: optimisticId,
         content: suggestion,
         role: "user" as const,
@@ -461,7 +466,7 @@ export function useChatCore({
             role: "user",
             content: suggestion,
           },
-          options
+          options as any
         )
         setMessages((prev) => prev.filter((msg) => msg.id !== optimisticId))
       } catch {

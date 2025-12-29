@@ -58,7 +58,7 @@ export function Conversation({
                 key={message.id}
                 id={message.id}
                 variant={message.role}
-                attachments={message.experimental_attachments}
+                attachments={(message as any).attachments}
                 isLast={isLast}
                 onDelete={onDelete}
                 onEdit={onEdit}
@@ -72,7 +72,7 @@ export function Conversation({
                 }
                 isUserAuthenticated={isUserAuthenticated}
               >
-                {message.content}
+                {(message as any).content || ""}
               </Message>
             )
           })}
