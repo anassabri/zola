@@ -109,7 +109,6 @@ export async function POST(req: Request) {
       system: effectiveSystemPrompt,
       messages: messages,
       tools: {} as ToolSet,
-      maxSteps: 10,
       onError: (err: unknown) => {
         console.error("Streaming error occurred:", err)
         // Don't set streamError anymore - let the AI SDK handle it through the stream
@@ -130,8 +129,6 @@ export async function POST(req: Request) {
     })
 
     return result.toDataStreamResponse({
-      sendReasoning: true,
-      sendSources: true,
       getErrorMessage: (error: unknown) => {
         console.error("Error forwarded to client:", error)
         return extractErrorMessage(error)
