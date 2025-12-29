@@ -29,7 +29,7 @@ export async function syncRecentMessages(
           updated[i] = {
             ...local,
             id: String(dbMsg.id),
-            createdAt: dbMsg.createdAt,
+            createdAt: (dbMsg as any).createdAt,
           } as any
           changed = true
         }
