@@ -10,7 +10,7 @@ import { ExtendedMessageAISDK } from "@/lib/chat-store/messages/api"
 import { getModelInfo } from "@/lib/models"
 import { PROVIDERS } from "@/lib/providers"
 import { cn } from "@/lib/utils"
-import type { Message as MessageType } from "ai"
+import type { UIMessage as MessageType } from "@ai-sdk/ui-utils"
 import { useEffect, useState } from "react"
 import { Message } from "../chat/message"
 
