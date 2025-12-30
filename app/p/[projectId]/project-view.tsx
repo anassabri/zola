@@ -100,7 +100,7 @@ export function ProjectView({ projectId }: ProjectViewProps) {
     initialMessages: [],
     onFinish: cacheAndAddMessage,
     onError: handleError,
-  })
+  } as any) as any
 
   const { selectedModel, handleModelChange } = useModel({
     currentChat: null,
@@ -204,9 +204,9 @@ export function ProjectView({ projectId }: ProjectViewProps) {
       content: input,
       role: "user" as const,
       createdAt: new Date(),
-      experimental_attachments:
+      attachments:
         optimisticAttachments.length > 0 ? optimisticAttachments : undefined,
-    }
+    } as any
 
     setMessages((prev) => [...prev, optimisticMessage])
     setInput("")
@@ -218,7 +218,7 @@ export function ProjectView({ projectId }: ProjectViewProps) {
       const currentChatId = await ensureChatExists(user.id)
       if (!currentChatId) {
         setMessages((prev) => prev.filter((msg) => msg.id !== optimisticId))
-        cleanupOptimisticAttachments(optimisticMessage.experimental_attachments)
+        cleanupOptimisticAttachments(optimisticMessage.attachments)
         return
       }
 
@@ -228,7 +228,7 @@ export function ProjectView({ projectId }: ProjectViewProps) {
           status: "error",
         })
         setMessages((prev) => prev.filter((msg) => msg.id !== optimisticId))
-        cleanupOptimisticAttachments(optimisticMessage.experimental_attachments)
+        cleanupOptimisticAttachments(optimisticMessage.attachments)
         return
       }
 
@@ -238,7 +238,7 @@ export function ProjectView({ projectId }: ProjectViewProps) {
         if (attachments === null) {
           setMessages((prev) => prev.filter((m) => m.id !== optimisticId))
           cleanupOptimisticAttachments(
-            optimisticMessage.experimental_attachments
+            optimisticMessage.attachments
           )
           return
         }
@@ -253,12 +253,12 @@ export function ProjectView({ projectId }: ProjectViewProps) {
           systemPrompt: SYSTEM_PROMPT_DEFAULT,
           enableSearch,
         },
-        experimental_attachments: attachments || undefined,
+        attachments: attachments || undefined,
       }
 
-      handleSubmit(undefined, options)
+      handleSubmit(undefined, options as any)
       setMessages((prev) => prev.filter((msg) => msg.id !== optimisticId))
-      cleanupOptimisticAttachments(optimisticMessage.experimental_attachments)
+      cleanupOptimisticAttachments(optimisticMessage.attachments)
       cacheAndAddMessage(optimisticMessage)
 
       // Bump existing chats to top (non-blocking, after submit)

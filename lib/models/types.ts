@@ -1,4 +1,4 @@
-import type { LanguageModelV1 } from "ai"
+import type { LanguageModel } from "ai"
 
 type ModelConfig = {
   id: string // "gpt-4.1-nano" // same from AI SDKs
@@ -34,7 +34,7 @@ type ModelConfig = {
   icon?: string // e.g. "gpt-4", "claude", "mistral", or custom string
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  apiSdk?: (apiKey?: string, opts?: { enableSearch?: boolean }) => LanguageModelV1 | any
+  apiSdk?: (apiKey?: string, opts?: { enableSearch?: boolean }) => LanguageModel | any
 
   accessible?: boolean // true if the model is accessible to the user
 }

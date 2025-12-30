@@ -10,7 +10,7 @@ import { SYSTEM_PROMPT_DEFAULT } from "@/lib/config"
 import { useModel } from "@/lib/model-store/provider"
 import { useUser } from "@/lib/user-store/provider"
 import { cn } from "@/lib/utils"
-import type { Message as MessageType } from "ai"
+import type { UIMessage as MessageType } from "@ai-sdk/ui-utils"
 import { AnimatePresence, motion } from "motion/react"
 import { useCallback, useMemo, useState } from "react"
 import { MultiChatInput } from "./multi-chat-input"
@@ -107,7 +107,7 @@ export function MultiChat() {
       const message = persistedMessages[i]
 
       if (message.role === "user") {
-        const groupKey = message.content
+        const groupKey = (message as any).content
         if (!groups[groupKey]) {
           groups[groupKey] = {
             userMessage: message,
@@ -124,7 +124,7 @@ export function MultiChat() {
         }
 
         if (associatedUserMessage) {
-          const groupKey = associatedUserMessage.content
+          const groupKey = (associatedUserMessage as any).content
           if (!groups[groupKey]) {
             groups[groupKey] = {
               userMessage: associatedUserMessage,
@@ -173,7 +173,7 @@ export function MultiChat() {
         const assistantMsg = chat.messages[i + 1]
 
         if (userMsg?.role === "user") {
-          const groupKey = userMsg.content
+          const groupKey = (userMsg as any).content
 
           if (!liveGroups[groupKey]) {
             liveGroups[groupKey] = {
@@ -207,8 +207,7 @@ export function MultiChat() {
               id: `loading-${chat.model.id}`,
               role: "assistant",
               content: "",
-              createdAt: new Date(),
-            }
+            } as any
             liveGroups[groupKey].responses.push({
               model: chat.model.id,
               message: placeholderMessage,

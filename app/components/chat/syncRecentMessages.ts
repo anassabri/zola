@@ -26,11 +26,12 @@ export async function syncRecentMessages(
         if (local.role !== dbRole) continue
 
         if (String(local.id) !== String(dbMsg.id)) {
-          updated[i] = {
+          const updatedMsg: any = {
             ...local,
             id: String(dbMsg.id),
-            createdAt: dbMsg.createdAt,
-          } as any
+            createdAt: (dbMsg as any).createdAt,
+          }
+          updated[i] = updatedMsg
           changed = true
         }
         break
