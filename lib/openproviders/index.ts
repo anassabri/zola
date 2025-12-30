@@ -14,9 +14,9 @@ export function openproviders(
   if (provider === "google") {
     if (apiKey) {
       const googleProvider = createGoogleGenerativeAI({ apiKey })
-      return googleProvider(modelId, settings)
+      return googleProvider(modelId, settings) as any
     }
-    return google(modelId, settings)
+    return google(modelId, settings) as any
   }
 
   throw new Error(`Unsupported model: ${modelId}`)
